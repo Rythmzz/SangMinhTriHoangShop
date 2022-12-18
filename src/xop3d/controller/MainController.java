@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import Recaptcha.CaptchaConfig;
 import xop3d.bean.cart;
 import xop3d.entity.advertise;
 import xop3d.entity.customer;
@@ -345,9 +345,11 @@ public class MainController {
 	}
 	public static String username = "Guest";
 	public static user userlogin;
+	
 	@RequestMapping(value = "sign-up" ,method=RequestMethod.POST)
 	public String dangki(Model model,HttpServletRequest re,@ModelAttribute("User") user us,BindingResult err) throws ParseException {
-		
+		String gRecaptchaResp = re.getParameter("g-recaptcha-response");
+		Boolean verify = CaptchaConfig.verify(gRecaptchaResp);
 		Session s = this.factory.openSession();
 		Transaction t = s.beginTransaction();
 		boolean temp = true;
@@ -395,7 +397,7 @@ public class MainController {
 		int gtinh=us.getGender();
 		String pass=us.getPassword().trim();
 		user us2=new user();
-		if(temp==true) {
+		if(temp==true&&verify) {
 			try{
 				if(s.get(user.class,us.getUsername().trim())==null) {
 					us2.setUsername(MaHoaDes.Encrypt(ten,key));
@@ -501,8 +503,10 @@ public class MainController {
 	}
 	@RequestMapping(value = "login" ,method=RequestMethod.POST)
 	public String dangnhap(Model model,HttpServletRequest re) throws ParseException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
-	
-		Session session = this.factory.openSession();
+		String gRecaptchaResp = re.getParameter("g-recaptcha-response");
+		Boolean verify = CaptchaConfig.verify(gRecaptchaResp);
+		if(verify)
+		{Session session = this.factory.openSession();
 		String hql = "FROM user";
 		Query query =session.createQuery(hql);
 		List<user> list = query.list();
@@ -519,6 +523,9 @@ public class MainController {
 			}
 		}
 		model.addAttribute("tb", "Đăng nhập thất bại vui lòng kiếm tra lại !");
+		return "user-login";
+		}
+		model.addAttribute("tb", "vui lòng xác thực !");
 		return "user-login";
 	}
 	@RequestMapping(value = "login" ,method=RequestMethod.GET)
