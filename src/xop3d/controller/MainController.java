@@ -513,8 +513,6 @@ public class MainController {
 		for (user user : list) {
 			String pass1=MaHoaDes.Decrypt(user.getPassword(),"HEHE");
 			String username1=MaHoaDes.Decrypt(user.getUsername(),"HEHE");
-			System.out.println(username1);
-			System.out.println(pass1);
 				if((re.getParameter("user").trim().equals(username1)) && (re.getParameter("pass").trim().equals(pass1))) {
 				username = username1;
 				model.addAttribute("username", username);

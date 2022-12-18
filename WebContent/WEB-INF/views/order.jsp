@@ -101,7 +101,7 @@
                         <h1>Số tiền phải thanh toán</h1>
                         <h1><fmt:formatNumber pattern="###,### VND" value="${tongTien +30000}" type="currency" /></h1> 
                     </div>
-                    <button style="width: 100%;height: 40px;margin: 10px 0px;background-color: #2AC37D;color: white;font-size: 18px;"><a >Đặt hàng</a></button>
+                    <button style="width: 100%;height: 40px;margin: 10px 0px;background-color: red;color: white;font-size: 18px;"><a >Đặt hàng</a></button>
                 </div>
             </div>
             <div class="right">
@@ -143,7 +143,7 @@
                             <h4><fmt:formatNumber pattern="###,### VND" value="${tongTien}" type="currency" /></h4> 
                         </div>
                     </div>
-                    <input style="width: 100%;height: 40px;margin: 10px 0px;background-color: #2AC37D;color: white;font-size: 18px;" type="submit" formaction="${pageContext.request.contextPath}/home/order-pr.htm" value="Cập nhật giỏ hàng">
+                    <input style="width: 100%;height: 40px;margin: 10px 0px;background-color: red;color: white;font-size: 18px;" type="submit" formaction="${pageContext.request.contextPath}/home/order-pr.htm" value="Cập nhật giỏ hàng">
                 </div>
             </div>
         </div>
