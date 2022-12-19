@@ -53,7 +53,6 @@
 							</c:if>
 						</c:forEach>
 					</ul>
-					</div>
                 <div class="navbar-right">
                     <div class="search">
                         <input class="ip-search" />
@@ -61,7 +60,7 @@
                     </div>
                     <button><i class="fas fa-shopping-cart"></i></button>
                     <button onclick="document.getElementById('user').style.display='block'"><i class="fas fa-user"></i></button>
-                </div>
+                </div></div>
 			</div>
 		</div>
 		        <div id="user" class="user-box">
